@@ -291,6 +291,10 @@
 				var supportedDomain = (hostName.substring(hostName.length - 8, hostName.length) === '.draw.io') ||
 					(hostName.substring(hostName.length - 13, hostName.length) === '.diagrams.net');
 					(hostName.substring(hostName.length - 17, hostName.length) === '.quipelements.com');
+
+					console.log("hostName", hostName);
+					console.log("supportedDomain", supportedDomain);
+					console.log("mxIsElectron", mxIsElectron);
 				
 				function loadAppJS()
 				{
@@ -428,11 +432,9 @@
 <body class="geEditor">
 <div id="geInfo">
 	<div class="geBlock" style="text-align:center;min-width:50%;">
-		<h1>Flowchart Maker and Online Diagram Software</h1>
-		<p>
-			diagrams.net (formerly draw.io) is free online diagram software. You can use it as a flowchart maker, network diagram software, to create UML online, as an ER diagram tool, 
-			to design database schema, to build BPMN online, as a circuit diagram maker, and more. draw.io can import .vsdx, Gliffy&trade; and Lucidchart&trade; files .
-		</p>
+		<div style="padding:50px;">
+			<img src="/images/logo-login.png" style="margin-top:100px;" />
+		</div>
 		<h2 id="geStatus">Loading...</h2>
 		<p>
 			Please ensure JavaScript is enabled.

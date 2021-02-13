@@ -850,6 +850,13 @@ DrawioFile.prototype.save = function(revision, success, error, unloading, overwr
  */
 DrawioFile.prototype.updateFileData = function()
 {
+	console.log("UPDATE THIS", this)
+	console.log("UPDATE THIS UI", this.ui)
+	console.log("this.isCompressed()", this.isCompressed())
+	console.log("UPDATED FILE DATA NORMAL uncompressed:", this.ui.getFileData(null, null, null, null, null, null, null, null, this, true) );
+	console.log("UPDATED FILE DATA NORMAL compressed:", this.ui.getFileData(null, null, null, null, null, null, null, null, this, false) );
+	console.log("UPDATED FILE DATA XML uncompressed:", mxUtils.getXml(this.ui.getXmlFileData(null, null, true)));
+	console.log("UPDATED FILE DATA XML compressed:", mxUtils.getXml(this.ui.getXmlFileData(null, null, false)));
 	this.setData(this.ui.getFileData(null, null, null, null, null, null, null, null, this, !this.isCompressed()));
 };
 
@@ -1132,7 +1139,7 @@ DrawioFile.prototype.open = function()
 		// only if the file has not been modified and reopened
 		if (!this.isModified())
 		{
-			this.shadowData = mxUtils.getXml(this.ui.getXmlFileData());
+			this.shadowData = mxUtils.getXml(this.ui.getXmlFileData()); // REMEMBER THIS
 			this.shadowPages = null;
 		}
 	}
@@ -1925,6 +1932,9 @@ DrawioFile.prototype.fileChanged = function()
 {
 	this.lastChanged = new Date();
 	this.setModified(true);
+
+	console.log("fileChanged THIS", this);
+	
 	
 	if (this.isAutosave())
 	{

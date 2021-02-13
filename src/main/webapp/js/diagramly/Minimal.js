@@ -164,7 +164,7 @@ EditorUi.initMinimalTheme = function()
         if (ui.formatWindow.window.isVisible())
         {
             ui.formatWindow.window.fit();
-        }
+		}
 	};
 
 	function toggleShapes(ui, visible)
@@ -397,7 +397,7 @@ EditorUi.initMinimalTheme = function()
     
     App.prototype.updateUserElement = function()
     {
-    	appUpdateUserElement.apply(this, arguments);
+		appUpdateUserElement.apply(this, arguments);
     	
 		if (this.userElement != null)
 		{
@@ -1014,7 +1014,7 @@ EditorUi.initMinimalTheme = function()
      
 		if (iw >= 1000 || urlParams['clibs'] != null || urlParams['libs'] != null || urlParams['search-shapes'] != null)
 		{
-			toggleShapes(this, true);
+			// toggleShapes(this, true);
 			
 			if (this.sidebar != null && urlParams['search-shapes'] != null && this.sidebar.searchShapes != null)
 			{
@@ -1025,7 +1025,7 @@ EditorUi.initMinimalTheme = function()
         
 		if (iw >= 1000)
 		{
-			toggleFormat(this, true);
+			// toggleFormat(this, true);
 		}
         
 		// Needed for creating elements in Format panel

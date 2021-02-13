@@ -542,6 +542,8 @@
 	 */
 	EditorUi.prototype.getLocalData = function(key, fn)
 	{
+		console.log("GET LOCAL ITEM", key, localStorage.getItem(key), fn );
+
 		fn(localStorage.getItem(key));
 	};
 	
@@ -551,7 +553,7 @@
 	EditorUi.prototype.setLocalData = function(key, data, fn)
 	{
 		localStorage.setItem(key, data);
-		
+		console.log("SET LOCAL ITEM", key, data, fn);
 		if (fn != null)
 		{
 			fn();

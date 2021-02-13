@@ -56,7 +56,11 @@ App = function(editor, container, lightbox)
 	this.editor.addListener('autosaveChanged', mxUtils.bind(this, function()
 	{
 		var file = this.getCurrentFile();
-		
+		console.log("THIS", this);
+		console.log("EDITOR UI", EditorUi);
+		console.log("AUTO SAVE", file);
+		console.log("AUTO SAVE STATE", this.editor.autosave);
+
 		if (file != null)
 		{
 			EditorUi.logEvent({category: ((this.editor.autosave) ? 'ON' : 'OFF') +
@@ -371,6 +375,7 @@ App.loadScripts = function(scripts, onload)
  */
 App.getStoredMode = function()
 {
+	console.log("isLocalStorage", isLocalStorage);
 	var mode = null;
 	
 	if (mode == null && isLocalStorage)
@@ -840,6 +845,7 @@ App.main = function(callback, createUi)
 					};
 					
 					var value = JSON.parse(Graph.decompress(window.location.hash.substring(9)));
+					console.log("DECOMPRESS", value);
 
 					if (value != null && checkPlugins(value.plugins))
 					{
@@ -1075,15 +1081,25 @@ App.main = function(callback, createUi)
 	}
 	else
 	{
+		var configData = {
+			"ui": "min", 
+			"defaultFonts": ["Comic Sans MS", "Courier New", "Tahoma"],
+			"presetColors": ["F8CECC", "F19C99", "EA6B66"],
+			"defaultColors": ["none", "FFFFFF", "E6E6E6"]
+		};
+		console.log("CONFIG APP",Editor.config, configData, configData != null);
+
 		if (Editor.config == null)
 		{
 			// Loads configuration from global scope or local storage
-			if (window.DRAWIO_CONFIG != null)
+			if (configData != null)
 			{
 				try
 				{
-					EditorUi.debug('Using global configuration', window.DRAWIO_CONFIG);
-					Editor.configure(window.DRAWIO_CONFIG);
+					console.log("Using global configuration", configData);
+					EditorUi.debug('Using global configuration', configData);
+					Editor.configure(configData);
+					// Editor.configure(window.DRAWIO_CONFIG);
 					mxSettings.load();
 				}
 				catch (e)
@@ -1096,32 +1112,32 @@ App.main = function(callback, createUi)
 			}
 	
 			// Loads configuration from local storage
-			if (isLocalStorage && localStorage != null && urlParams['embed'] != '1')
-			{
-				var configData = localStorage.getItem('.configuration');
+			// if (isLocalStorage && localStorage != null && urlParams['embed'] != '1')
+			// {
+			// 	var configData = localStorage.getItem('.configuration');
 	
-				if (configData != null)
-				{
-					try
-					{
-						configData = JSON.parse(configData);
+			// 	if (configData != null)
+			// 	{
+			// 		try
+			// 		{
+			// 			configData = JSON.parse(configData);
 						
-						if (configData != null)
-						{
-							EditorUi.debug('Using local configuration', configData);
-							Editor.configure(configData);
-							mxSettings.load();
-						}
-					}
-					catch (e)
-					{
-						if (window.console != null)
-						{
-							console.error(e);
-						}
-					}
-				}
-			}
+			// 			if (configData != null)
+			// 			{
+			// 				EditorUi.debug('Using local configuration', configData);
+			// 				Editor.configure(configData);
+			// 				mxSettings.load();
+			// 			}
+			// 		}
+			// 		catch (e)
+			// 		{
+			// 			if (window.console != null)
+			// 			{
+			// 				console.error(e);
+			// 			}
+			// 		}
+			// 	}
+			// }
 		}
 		
 		doMain();
@@ -1696,6 +1712,9 @@ App.prototype.init = function()
 	{
 		this.initializeViewerMode();
 	}
+
+	this.editor.graph.gridEnabled = false;
+	console.log("END OF INIT:", this);
 };
 
 /**
