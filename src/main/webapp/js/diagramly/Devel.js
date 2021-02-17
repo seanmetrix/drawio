@@ -48,6 +48,7 @@ if (!mxIsElectron && location.protocol !== 'http:')
 				//---------------------------------------------------------//
 				'; ' +
 			'connect-src %connect-src% \'self\' https://*.draw.io https://*.diagrams.net ' +
+				'https://xc18-e48d-15e9.n7.xano.io' +
 				'https://*.googleapis.com wss://*.pusher.com https://*.pusher.com ' +
 				'https://api.github.com https://raw.githubusercontent.com https://gitlab.com ' +
 				'https://graph.microsoft.com https://*.sharepoint.com  https://*.1drv.com ' +

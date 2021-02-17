@@ -796,6 +796,35 @@ DrawioFile.prototype.save = function(revision, success, error, unloading, overwr
 {
 	try
 	{
+		console.log("SAVE", urlParams['ably']);
+		if (urlParams['ably'] == 'server'){
+			console.log("SEND ABLY MESSAGE", JSON.stringify(mxUtils.getXml(this.ui.getXmlFileData(null, null, true))));
+			window.savedXML.push( mxUtils.getXml(this.ui.getXmlFileData(null, null, true)));
+			var record = mxUtils.getXml(this.ui.getXmlFileData(null, null, true));
+			channel.publish('xmlData', record);
+		}
+
+		// var record = JSON.stringify(mxUtils.getXml(this.ui.getXmlFileData(null, null, true)));
+		// console.log("RECORD:", record);
+		// var req = new mxXmlRequest("https://xc18-e48d-15e9.n7.xano.io/api:_R_aDhIn/xml_history","record=" + encodeURIComponent(record), "POST", false);
+			
+		// req.send(
+		// 	function(req){
+		// 		console.log("XANO response", req, req.getStatus());
+		// 		if (req.getStatus() >= 200 && req.getStatus() <= 299)
+		// 		{
+		// 			console.log("XANO response success", req);
+		// 		}
+		// 		else
+		// 		{
+		// 			console.log("XANO response error", req);
+		// 		}
+		// 	},
+		// 	function(e){
+		// 		console.log("XANO response BIG error", e);
+		// 	}
+		// );
+
 		if (!this.isEditable())
 		{
 			if (error != null)
@@ -857,6 +886,7 @@ DrawioFile.prototype.updateFileData = function()
 	console.log("UPDATED FILE DATA NORMAL compressed:", this.ui.getFileData(null, null, null, null, null, null, null, null, this, false) );
 	console.log("UPDATED FILE DATA XML uncompressed:", mxUtils.getXml(this.ui.getXmlFileData(null, null, true)));
 	console.log("UPDATED FILE DATA XML compressed:", mxUtils.getXml(this.ui.getXmlFileData(null, null, false)));
+
 	this.setData(this.ui.getFileData(null, null, null, null, null, null, null, null, this, !this.isCompressed()));
 };
 
@@ -1933,7 +1963,7 @@ DrawioFile.prototype.fileChanged = function()
 	this.lastChanged = new Date();
 	this.setModified(true);
 
-	console.log("fileChanged THIS", this);
+	console.log("fileChanged THIS", this, this.isAutosave());
 	
 	
 	if (this.isAutosave())

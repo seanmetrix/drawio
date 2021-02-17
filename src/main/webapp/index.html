@@ -16,7 +16,11 @@
 	<meta name="msapplication-config" content="images/browserconfig.xml">
     <meta name="mobile-web-app-capable" content="yes">
 	<meta name="theme-color" content="#d89000">
+	<script type="text/javascript" src="//cdn.ably.io/lib/ably.min-1.js"></script>
 	<script type="text/javascript">
+		
+		var ably = new Ably.Realtime('KZFVeA.MWoBfw:JoEMMm4NaL0WecL3');
+		var channel = ably.channels.get('drawio');
 		/**
 		 * URL Parameters and protocol description are here:
 		 *
@@ -235,6 +239,7 @@
 		{
 			if (mxScriptsLoaded && mxWinLoaded)
 			{
+				console.log("App.Main(); from checkAllLoaded");
 				App.main();				
 			}
 		};
@@ -464,11 +469,13 @@ else
 		window.addEventListener('load', function()
 		{
 			mxWinLoaded = true;
+			console.log("Check All Loaded");
 			checkAllLoaded();
 		});
 	}
 	else
 	{
+		console.log("App.Main();");
 		App.main();
 	}
 }

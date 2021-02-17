@@ -1100,6 +1100,7 @@ App.main = function(callback, createUi)
 					EditorUi.debug('Using global configuration', configData);
 					Editor.configure(configData);
 					// Editor.configure(window.DRAWIO_CONFIG);
+					console.log("LOAD MXSETTINGS", mxSettings);
 					mxSettings.load();
 				}
 				catch (e)
@@ -1612,6 +1613,7 @@ App.prototype.init = function()
 			{
 				var file = this.getCurrentFile();
 				var mode = (file != null) ? file.getMode() : null;
+				console.log("EVENT LISTENER: fileLoaded",file, mode );
 				
 				if (mode == App.MODE_DEVICE || mode == App.MODE_BROWSER)
 				{
@@ -1715,6 +1717,29 @@ App.prototype.init = function()
 
 	this.editor.graph.gridEnabled = false;
 	console.log("END OF INIT:", this);
+
+	window.savedXML = [];
+	window.jonThis = this;
+
+	window.syncFromArray = function(index) {
+		console.log("SAVED XML", window.savedXML, index, window.savedXML[index], this, jonThis);
+		var tempFile = new LocalFile(window.jonThis, window.savedXML[index], "", true);
+		window.jonThis.fileLoaded(tempFile);
+	}
+
+	if (urlParams['ably'] == 'client'){
+		console.log("ABLY CHANNEL SUBSCRIBE", urlParams['ably'], channel);
+		channel.subscribe('xmlData', function(message) {
+			console.log("ABLY MESSAGE RECIVED", message);
+			var xmlRecord = message.data;
+			console.log("ABLY MESSAGE xmlRecord", xmlRecord);
+			var tempFile = new LocalFile(window.jonThis, xmlRecord, "", true);
+			console.log("ABLY MESSAGE tempFile", tempFile);
+			window.jonThis.fileLoaded(tempFile)
+			console.log("ABLY MESSAGE COMPLETE");
+		});
+	}
+
 };
 
 /**
@@ -2830,7 +2855,7 @@ App.prototype.load = function()
 			{
 				// ignores invalid state args
 			}
-			
+			console.log("SET ENABLED", this.getCurrentFile());
 			this.editor.graph.setEnabled(this.getCurrentFile() != null);
 			
 			// Passes the userId from the state parameter to the client
@@ -2996,6 +3021,7 @@ App.prototype.start = function()
 	
 	this.restoreLibraries();
 	this.spinner.stop();
+	console.log("START UP THE APP")
 
 	try
 	{
@@ -3026,7 +3052,8 @@ App.prototype.start = function()
 					{
 						var file = this.getCurrentFile();
 						EditorUi.debug('storage event', evt, file);
-	
+						console.log("isLocalStorage:", file);
+
 						if (file != null && evt.key == '.draft-alive-check' && evt.newValue != null && file.draftId != null)
 						{
 							this.draftAliveCheck = evt.newValue;
@@ -3058,6 +3085,7 @@ App.prototype.start = function()
 
 					if (file == null || file.getHash() != id)
 					{
+						console.log("LOAD HASH FILE");
 						this.loadFile(id, true);
 					}
 				}
@@ -3099,6 +3127,7 @@ App.prototype.start = function()
 		}
 		else if (this.getCurrentFile() == null)
 		{
+			console.log("CURRENT FILE IS NULL", this.dialog == null);
 			var done = mxUtils.bind(this, function()
 			{
 				// Starts in client mode and waits for data
@@ -3125,6 +3154,7 @@ App.prototype.start = function()
 						}
 						
 						var file = new LocalFile(this, xml, title, true);
+						console.log("NEW File",file);
 						
 						if (window.location.hash != null && window.location.hash.substring(0, 2) == '#P')
 						{
@@ -3133,12 +3163,16 @@ App.prototype.start = function()
 								return window.location.hash.substring(1);
 							};
 						}
-						
+						console.log("File Loaded",file);
 						this.fileLoaded(file);
 						this.getCurrentFile().setModified(!this.editor.chromeless);
 					});
 
+					console.log("doLoadFile",doLoadFile);
+
 					var parent = window.opener || window.parent;
+
+					console.log("doLoadFile parent", parent);
 					
 					if (parent != window)
 					{
@@ -3163,6 +3197,7 @@ App.prototype.start = function()
 									// Ignores messages from other windows
 									if (evt.source == parent)
 									{
+										console.log("DO LOAD FILE XML", xml, evt)
 										doLoadFile(xml);
 									}
 								}));
@@ -3213,6 +3248,7 @@ App.prototype.start = function()
 							}
 							else if (id != null && id.length > 0)
 							{
+								console.log("LOAD FILE", id);
 								this.loadFile(id, null, null, mxUtils.bind(this, function()
 								{
 									var temp = decodeURIComponent(urlParams['viewbox'] || '');
@@ -3221,7 +3257,9 @@ App.prototype.start = function()
 									{
 										try
 										{
+											console.log("TEMP: ", temp);
 											var bounds = JSON.parse(temp);
+											console.log("BOUNDS: ", bounds);
 											this.editor.graph.fitWindow(bounds, bounds.border);
 										}
 										catch (e)
@@ -3234,16 +3272,20 @@ App.prototype.start = function()
 							}
 							else if (urlParams['splash'] != '0')
 							{
+								console.log("NO SPLASH LOAD FILE");
 								this.loadFile();
 							}
 							else
 							{
+								console.log("CREATE FILE:", this.getFileData());
 								this.createFile(this.defaultFilename, this.getFileData(), null, null, null, null, null, true);
 							}
 						}
 					}
 				}
 			});
+
+			console.log("DONE:", done);
 	
 			var value = decodeURIComponent(urlParams['create'] || '');
 			
@@ -3266,6 +3308,7 @@ App.prototype.start = function()
 					// Resets mode for dialog - local file is only for preview
 					if (urlParams['splash'] != '0')
 					{
+						console.log("showCreateDialog", xml);
 						this.fileLoaded(new LocalFile(this, xml, null));
 						
 						this.editor.graph.setEnabled(false);
@@ -4907,7 +4950,7 @@ App.prototype.loadFile = function(id, sameWindow, file, success, force)
 			if (id.charAt(0) == 'L')
 			{
 				this.spinner.stop();
-
+				console.log("LOAD FILE: isLocalStorage", isLocalStorage);
 				if (!isLocalStorage)
 				{
 					this.handleError({message: mxResources.get('serviceUnavailableOrBlocked')}, mxResources.get('errorLoadingFile'), mxUtils.bind(this, function()
@@ -4933,6 +4976,7 @@ App.prototype.loadFile = function(id, sameWindow, file, success, force)
 					{
 						if (data != null)
 						{
+							console.log("LOAD FILE fileLoaded:", data, new StorageFile(this, data, id));
 							this.fileLoaded(new StorageFile(this, data, id));
 
 							if (success != null)
@@ -4951,6 +4995,7 @@ App.prototype.loadFile = function(id, sameWindow, file, success, force)
 			{
 				// File already loaded
 				this.spinner.stop();
+				console.log("LOAD FILE fileLoaded File already loaded:", file);
 				this.fileLoaded(file);
 
 				if (success != null)

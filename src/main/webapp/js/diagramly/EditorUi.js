@@ -1735,6 +1735,8 @@
 		this.pages = null;
 
 		var node = (data != null && data.length > 0) ? mxUtils.parseXml(data).documentElement : null;
+
+		console.log("*********** setFileData ****** ", data, node);
 		
 		// Checks for parser errors
 		var cause = Editor.extractParserError(node, mxResources.get('invalidOrMissingFile'));
@@ -1745,14 +1747,15 @@
 		}
 		else
 		{
+			console.log("WHAT IS NODE:", node);
 			// Some nodes must be extracted here to find the mxfile node
 			// LATER: Remove duplicate call to extractGraphModel in overridden setGraphXml
-			var tmp = (node != null) ? this.editor.extractGraphModel(node, true) : null;
-			
-			if (tmp != null)
-			{
-				node = tmp;
-			}
+			// var tmp = (node != null) ? this.editor.extractGraphModel(node, true) : null;
+			// var tmp = node;
+			// if (tmp != null)
+			// {
+			// 	node = tmp;
+			// }
 
 			if (node != null && node.nodeName == 'mxfile')
 			{
@@ -1808,6 +1811,7 @@
 			
 			// Avoids scroll offset when switching page
 			this.editor.setGraphXml(node);
+			console.log("setGraphXml:", node);
 			
 			// Avoids duplicate parsing of the XML stored in the node
 			if (this.currentPage != null)
@@ -13434,6 +13438,7 @@
 	 */
 	EditorUi.prototype.openDatabase = function(success, error)
 	{
+		console.log("OPEN DATABASE:", this.database);
 		if (this.database == null)
 		{
 			var indexedDB = window.indexedDB || window.mozIndexedDB || window.webkitIndexedDB;
@@ -13550,6 +13555,7 @@
 								{
 									try
 									{
+										console.log("SET BASE ITEM:", file, next);
 										this.setDatabaseItem(null, [{
 											title: file.title,
 											size: file.data.length,

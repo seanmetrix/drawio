@@ -1962,6 +1962,7 @@
 	{
 		node = (node != null && node.nodeName != 'mxlibrary') ? this.extractGraphModel(node) : null;
 
+
 		if (node != null)
 		{
 			// Checks input for parser errors
