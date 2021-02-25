@@ -12,7 +12,7 @@ if (!mxIsElectron && location.protocol !== 'http:')
 	{
 		var csp = 'default-src \'self\'; ' +
 			// storage.googleapis.com is needed for workbox-service-worker
-			'script-src %script-src% \'self\' https://viewer.diagrams.net https://storage.googleapis.com ' +
+			'script-src %script-src% \'self\' http://localhost:8080 https://viewer.diagrams.net https://storage.googleapis.com ' +
 				'https://apis.google.com https://*.pusher.com https://code.jquery.com ' +
 				// Below are the SHAs of the two script blocks in index.html.
 				// These must be updated here and in the CDN after changes.
@@ -55,6 +55,7 @@ if (!mxIsElectron && location.protocol !== 'http:')
 				'https://*.google.com https://fonts.gstatic.com https://fonts.googleapis.com; ' +
 			// font-src about: is required for MathJax HTML-CSS output with STIX
 			'img-src * data:; media-src * data:; font-src * about:; ' +
+			'manifest-src http://localhost:8080 http://localhost:9005; ' +
 			// www.draw.io required for browser data migration to app.diagrams.net and
 			// viewer.diagrams.net required for iframe embed preview
 			'frame-src %frame-src% \'self\' https://viewer.diagrams.net https://www.draw.io https://*.google.com; ' +
@@ -92,7 +93,7 @@ if (!mxIsElectron && location.protocol !== 'http:')
 					replace(/%style-src%/g, 'https://aui-cdn.atlassian.com https://*.atlassian.net').
 					replace(/%connect-src%/g, '').
 					replace(/  /g, ' '));
-			console.log('import.diagrams.net:', 'default-src \'self\'; worker-src blob:; img-src \'self\' blob: data: https://www.lucidchart.com ' +
+			console.log('import.diagrams.net:', 'default-src \'self\' http://localhost:8080 ; worker-src blob:; img-src \'self\' blob: data: https://www.lucidchart.com ' +
 					'https://app.lucidchart.com; style-src \'self\' \'unsafe-inline\'; frame-src https://www.lucidchart.com https://app.lucidchart.com;');
 			console.log('Development:', devCsp)
 		}
