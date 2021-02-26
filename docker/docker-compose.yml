@@ -1,0 +1,7 @@
+version: '3'
+services:
+  drawio:
+    build:
+      context: ..
+      dockerfile: ./docker/Dockerfile
+    image: jknight-drawio-bin:latest
