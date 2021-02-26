@@ -796,13 +796,13 @@ DrawioFile.prototype.save = function(revision, success, error, unloading, overwr
 {
 	try
 	{
-		console.log("SAVE", urlParams['ably']);
-		if (urlParams['ably'] == 'server'){
-			console.log("SEND ABLY MESSAGE", JSON.stringify(mxUtils.getXml(this.ui.getXmlFileData(null, null, true))));
-			window.savedXML.push( mxUtils.getXml(this.ui.getXmlFileData(null, null, true)));
-			var record = mxUtils.getXml(this.ui.getXmlFileData(null, null, true));
-			channel.publish('xmlData', record);
-		}
+		// console.log("SAVE", urlParams['ably']);
+		// if (urlParams['ably'] == 'server'){
+		// 	console.log("SEND ABLY MESSAGE", JSON.stringify(mxUtils.getXml(this.ui.getXmlFileData(null, null, true))));
+		// 	window.savedXML.push( mxUtils.getXml(this.ui.getXmlFileData(null, null, true)));
+		// 	var record = mxUtils.getXml(this.ui.getXmlFileData(null, null, true));
+		// 	channel.publish('xmlData', record);
+		// }
 
 		// var record = JSON.stringify(mxUtils.getXml(this.ui.getXmlFileData(null, null, true)));
 		// console.log("RECORD:", record);
@@ -1511,6 +1511,8 @@ DrawioFile.prototype.removeDraft = function()
  */
 DrawioFile.prototype.addUnsavedStatus = function(err)
 {
+	this.saveDraft();
+	return;
 	if (!this.inConflictState && this.ui.statusContainer != null && this.ui.getCurrentFile() == this)
 	{
 		if (err instanceof Error && err.message != null && err.message != '')
@@ -1543,6 +1545,7 @@ DrawioFile.prototype.addUnsavedStatus = function(err)
 
 			var status = mxUtils.htmlEntities(mxResources.get('unsavedChangesClickHereToSave')) +
 				((msg != null && msg != '') ? ' (' + mxUtils.htmlEntities(msg) + ')' : '');
+
 			this.ui.editor.setStatus('<div title="'+ status +
 				'" class="geStatusAlertOrange" style="cursor:pointer;overflow:hidden;">' + status + ' <img src="' +
 				Editor.saveImage + '" align="top" style="width:16px;margin-top:' + ((mxClient.IS_FF) ? -3 : -2) + 'px"/></div>');
