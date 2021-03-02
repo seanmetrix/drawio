@@ -5750,7 +5750,7 @@ App.prototype.updateButtonContainer = function()
 					this.actions.get('share').funct();
 				}));
 				
-				this.buttonContainer.appendChild(this.shareButton);
+				// this.buttonContainer.appendChild(this.shareButton);
 			}
 		}
 		else if (this.shareButton != null)

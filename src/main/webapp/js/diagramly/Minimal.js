@@ -1344,7 +1344,7 @@ EditorUi.initMinimalTheme = function()
 	    	};
 		}
         
-        wrapper.appendChild(ui.tabContainer);
+        // wrapper.appendChild(ui.tabContainer); // HIDE BOTTOM BAR
         wrapper.appendChild(menubar);
         wrapper.appendChild(ui.diagramContainer);
         previousParent.appendChild(wrapper);

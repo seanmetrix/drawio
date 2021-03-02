@@ -9456,7 +9456,7 @@
 			}), false);
 		}
 		
-		this.initPages();
+		// this.initPages();
 
 		// Embedded mode
 		if (urlParams['embed'] == '1')

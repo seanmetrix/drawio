@@ -436,6 +436,7 @@ Editor.prototype.resetGraph = function()
 	this.graph.currentTranslate.y = 0;
 	this.updateGraphComponents();
 	this.graph.view.setScale(1);
+	console.log("GRAPH Page", this.graph);
 };
 
 /**
@@ -487,7 +488,7 @@ Editor.prototype.readGraphState = function(node)
 	{
 		this.graph.pageVisible = false;
 	}
-	
+
 	this.graph.pageBreaksVisible = this.graph.pageVisible; 
 	this.graph.preferPageSize = this.graph.pageBreaksVisible;
 	
