@@ -418,7 +418,8 @@ Editor.prototype.createGraph = function(themes, model)
  */
 Editor.prototype.resetGraph = function()
 {
-	this.graph.gridEnabled = !this.isChromelessView() || urlParams['grid'] == '1';
+	// this.graph.gridEnabled = !this.isChromelessView() || urlParams['grid'] == '1';
+	this.graph.gridEnabled = false;
 	this.graph.graphHandler.guidesEnabled = true;
 	this.graph.setTooltips(true);
 	this.graph.setConnectable(true);
@@ -441,8 +442,10 @@ Editor.prototype.resetGraph = function()
  * Sets the XML node for the current diagram.
  */
 Editor.prototype.readGraphState = function(node)
-{
-	this.graph.gridEnabled = node.getAttribute('grid') != '0' && (!this.isChromelessView() || urlParams['grid'] == '1');
+{	
+	// GRID CONTROLS HERE
+	// this.graph.gridEnabled = node.getAttribute('grid') != '0' && (!this.isChromelessView() || urlParams['grid'] == '1');
+	this.graph.gridEnabled = false;
 	this.graph.gridSize = parseFloat(node.getAttribute('gridSize')) || mxGraph.prototype.gridSize;
 	this.graph.graphHandler.guidesEnabled = node.getAttribute('guides') != '0';
 	this.graph.setTooltips(node.getAttribute('tooltips') != '0');
