@@ -1719,27 +1719,7 @@ App.prototype.init = function()
 	console.log("END OF INIT:", this);
 
 	window.savedXML = [];
-	window.jonThis = this;
-
-	window.syncFromArray = function(index) {
-		console.log("SAVED XML", window.savedXML, index, window.savedXML[index], this, jonThis);
-		var tempFile = new LocalFile(window.jonThis, window.savedXML[index], "", true);
-		window.jonThis.fileLoaded(tempFile);
-	}
-
-	if (urlParams['ably'] == 'client'){
-		console.log("ABLY CHANNEL SUBSCRIBE", urlParams['ably'], channel);
-		channel.subscribe('xmlData', function(message) {
-			console.log("ABLY MESSAGE RECIVED", message);
-			var xmlRecord = message.data;
-			console.log("ABLY MESSAGE xmlRecord", xmlRecord);
-			var tempFile = new LocalFile(window.jonThis, xmlRecord, "", true);
-			console.log("ABLY MESSAGE tempFile", tempFile);
-			window.jonThis.fileLoaded(tempFile)
-			console.log("ABLY MESSAGE COMPLETE");
-		});
-	}
-
+	whiteboard_init(this);
 };
 
 /**

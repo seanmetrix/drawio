@@ -13441,10 +13441,14 @@
 		console.log("OPEN DATABASE:", this.database);
 		console.log("SAVE", urlParams['ably']);
 		if (urlParams['ably'] == 'server'){
-			console.log("SEND ABLY MESSAGE", JSON.stringify(mxUtils.getXml(this.getXmlFileData(null, null, true))));
+			console.log("SEND MESSAGE", JSON.stringify(mxUtils.getXml(this.getXmlFileData(null, null, true))));
 			window.savedXML.push( mxUtils.getXml(this.getXmlFileData(null, null, true)));
 			var record = mxUtils.getXml(this.getXmlFileData(null, null, true));
-			channel.publish('xmlData', record);
+
+			whiteboard_postMessage('immediation:whiteboard:publish', {
+				xml: record
+			});
+			// channel.publish('xmlData', record);
 		}
 
 		if (this.database == null)
