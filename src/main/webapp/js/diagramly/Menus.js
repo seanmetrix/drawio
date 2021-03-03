@@ -2028,7 +2028,7 @@
 				this.addMenuItems(menu, ['exportPng', 'exportJpg'], parent);
 			}
 			
-			this.addMenuItems(menu, ['exportSvg', '-'], parent);
+			this.addMenuItems(menu, ['exportSvg'], parent);
 			
 			// Redirects export to PDF to print in Chrome App
 			if (editorUi.isOffline() || editorUi.printPdfExport)
@@ -2041,18 +2041,18 @@
 				this.addMenuItems(menu, ['exportPdf'], parent);
 			}
 
-			if (!mxClient.IS_IE && (typeof(VsdxExport) !== 'undefined' || !editorUi.isOffline()))
-			{
-				this.addMenuItems(menu, ['exportVsdx'], parent);
-			}
+			// if (!mxClient.IS_IE && (typeof(VsdxExport) !== 'undefined' || !editorUi.isOffline()))
+			// {
+			// 	this.addMenuItems(menu, ['exportVsdx'], parent);
+			// }
 
-			this.addMenuItems(menu, ['-', 'exportHtml', 'exportXml', 'exportUrl'], parent);
+			// this.addMenuItems(menu, ['-', 'exportHtml', 'exportXml', 'exportUrl'], parent);
 
-			if (!editorUi.isOffline())
-			{
-				menu.addSeparator(parent);
-				this.addMenuItem(menu, 'export', parent).firstChild.nextSibling.innerHTML = mxResources.get('advanced') + '...';
-			}
+			// if (!editorUi.isOffline())
+			// {
+			// 	menu.addSeparator(parent);
+			// 	this.addMenuItem(menu, 'export', parent).firstChild.nextSibling.innerHTML = mxResources.get('advanced') + '...';
+			// }
 		})));
 
 		this.put('importFrom', new Menu(mxUtils.bind(this, function(menu, parent)
@@ -2568,28 +2568,28 @@
 			}
 		}));
 
-		this.put('embed', new Menu(mxUtils.bind(this, function(menu, parent)
-		{
-			var file = editorUi.getCurrentFile();
+		// this.put('embed', new Menu(mxUtils.bind(this, function(menu, parent)
+		// {
+		// 	var file = editorUi.getCurrentFile();
 			
-			if (file != null && (file.getMode() == App.MODE_GOOGLE ||
-				file.getMode() == App.MODE_GITHUB) && /(\.png)$/i.test(file.getTitle()))
-			{
-				this.addMenuItems(menu, ['liveImage', '-'], parent);
-			}
+		// 	if (file != null && (file.getMode() == App.MODE_GOOGLE ||
+		// 		file.getMode() == App.MODE_GITHUB) && /(\.png)$/i.test(file.getTitle()))
+		// 	{
+		// 		this.addMenuItems(menu, ['liveImage', '-'], parent);
+		// 	}
 			
-			this.addMenuItems(menu, ['embedImage', 'embedSvg', '-', 'embedHtml'], parent);
+		// 	this.addMenuItems(menu, ['embedImage', 'embedSvg', '-', 'embedHtml'], parent);
 			
-			if (!navigator.standalone && !editorUi.isOffline())
-			{
-				this.addMenuItems(menu, ['embedIframe'], parent);
-			}
+		// 	if (!navigator.standalone && !editorUi.isOffline())
+		// 	{
+		// 		this.addMenuItems(menu, ['embedIframe'], parent);
+		// 	}
 
-			if (urlParams['embed'] != '1' && !editorUi.isOffline())
-			{
-				this.addMenuItems(menu, ['-', 'googleDocs', 'googleSlides', 'googleSheets', '-', 'microsoftOffice', '-', 'embedNotion'], parent);
-			}
-		})));
+		// 	if (urlParams['embed'] != '1' && !editorUi.isOffline())
+		// 	{
+		// 		this.addMenuItems(menu, ['-', 'googleDocs', 'googleSlides', 'googleSheets', '-', 'microsoftOffice', '-', 'embedNotion'], parent);
+		// 	}
+		// })));
 
 		var addInsertItem = function(menu, parent, title, method)
 		{
@@ -2729,12 +2729,13 @@
 
         this.put('insertAdvanced', new Menu(mxUtils.bind(this, function(menu, parent)
         {
-			addInsertMenuItems(menu, parent, ['fromText', 'plantUml', 'mermaid', '-', 'formatSql']);
+			// addInsertMenuItems(menu, parent, ['fromText', 'plantUml', 'mermaid', '-', 'formatSql']);
+			addInsertMenuItems(menu, parent, ['fromText', 'plantUml', 'mermaid']);
 			
-			menu.addItem(mxResources.get('csv') + '...', null, function()
-			{
-				editorUi.showImportCsvDialog();
-			}, parent, null, isGraphEnabled());
+			// menu.addItem(mxResources.get('csv') + '...', null, function()
+			// {
+			// 	editorUi.showImportCsvDialog();
+			// }, parent, null, isGraphEnabled());
         })));
         
 		this.put('openRecent', new Menu(function(menu, parent)

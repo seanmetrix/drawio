@@ -181,18 +181,18 @@ EditorUi.initMinimalTheme = function()
 	           w - 6, Math.min(650, graph.container.clientHeight - 30),
 	           function(container)
 	        {
-	            var div = document.createElement('div');
-	            div.style.cssText = 'position:absolute;left:0;right:0;border-top:1px solid lightgray;' +
-	                'height:24px;bottom:31px;text-align:center;cursor:pointer;padding:6px 0 0 0;';
-	            div.className = 'geTitle';
-	            div.innerHTML = '<span style="font-size:18px;margin-right:5px;">+</span>';
-	            mxUtils.write(div, mxResources.get('moreShapes'));
-	            container.appendChild(div);
+	            // var div = document.createElement('div');
+	            // div.style.cssText = 'position:absolute;left:0;right:0;border-top:1px solid lightgray;' +
+	            //     'height:24px;bottom:31px;text-align:center;cursor:pointer;padding:6px 0 0 0;';
+	            // div.className = 'geTitle';
+	            // div.innerHTML = '<span style="font-size:18px;margin-right:5px;">+</span>';
+	            // mxUtils.write(div, mxResources.get('moreShapes'));
+	            // container.appendChild(div);
 	            
-	            mxEvent.addListener(div, 'click', function()
-	            {
-	                ui.actions.get('shapes').funct();
-	            });
+	            // mxEvent.addListener(div, 'click', function()
+	            // {
+	            //     ui.actions.get('shapes').funct();
+	            // });
 
 	            var menuObj = new Menubar(ui, container);
 	            
@@ -219,46 +219,46 @@ EditorUi.initMinimalTheme = function()
 					// Defined in native apps together with openLibrary
 					if (ui.actions.get('newLibrary') != null)
 					{
-			            var div = document.createElement('div');
-			            div.style.cssText = 'position:absolute;left:0px;width:50%;border-top:1px solid lightgray;' +
-			                'height:30px;bottom:0px;text-align:center;cursor:pointer;padding:0px;';
-			            div.className = 'geTitle';
-			            var span = document.createElement('span');
-			            span.style.cssText = 'position:relative;top:6px;';
-			            mxUtils.write(span, mxResources.get('newLibrary'));
-			            div.appendChild(span);
-			            container.appendChild(div);
+			            // var div = document.createElement('div');
+			            // div.style.cssText = 'position:absolute;left:0px;width:50%;border-top:1px solid lightgray;' +
+			            //     'height:30px;bottom:0px;text-align:center;cursor:pointer;padding:0px;';
+			            // div.className = 'geTitle';
+			            // var span = document.createElement('span');
+			            // span.style.cssText = 'position:relative;top:6px;';
+			            // mxUtils.write(span, mxResources.get('newLibrary'));
+			            // div.appendChild(span);
+			            // container.appendChild(div);
 			            
-			            mxEvent.addListener(div, 'click', ui.actions.get('newLibrary').funct);
+			            // mxEvent.addListener(div, 'click', ui.actions.get('newLibrary').funct);
 
-			            var div = document.createElement('div');
-			            div.style.cssText = 'position:absolute;left:50%;width:50%;border-top:1px solid lightgray;' +
-			                'height:30px;bottom:0px;text-align:center;cursor:pointer;padding:0px;border-left: 1px solid lightgray;';
-			            div.className = 'geTitle';
-			            var span = document.createElement('span');
-			            span.style.cssText = 'position:relative;top:6px;';
-			            mxUtils.write(span, mxResources.get('openLibrary'));
-			            div.appendChild(span);
-			            container.appendChild(div);
+			            // var div = document.createElement('div');
+			            // div.style.cssText = 'position:absolute;left:50%;width:50%;border-top:1px solid lightgray;' +
+			            //     'height:30px;bottom:0px;text-align:center;cursor:pointer;padding:0px;border-left: 1px solid lightgray;';
+			            // div.className = 'geTitle';
+			            // var span = document.createElement('span');
+			            // span.style.cssText = 'position:relative;top:6px;';
+			            // mxUtils.write(span, mxResources.get('openLibrary'));
+			            // div.appendChild(span);
+			            // container.appendChild(div);
 			            
-			            mxEvent.addListener(div, 'click', ui.actions.get('openLibrary').funct);
+			            // mxEvent.addListener(div, 'click', ui.actions.get('openLibrary').funct);
 					}
 					else
 					{
-						var elt = addMenu('newLibrary', mxResources.get('newLibrary'));
-						elt.style.boxSizing = 'border-box';
-						elt.style.paddingRight = '6px';
-						elt.style.paddingLeft = '6px';
-						elt.style.height = '32px';
-			            elt.style.left = '0';
+						// var elt = addMenu('newLibrary', mxResources.get('newLibrary'));
+						// elt.style.boxSizing = 'border-box';
+						// elt.style.paddingRight = '6px';
+						// elt.style.paddingLeft = '6px';
+						// elt.style.height = '32px';
+			            // elt.style.left = '0';
 			            
-			            var elt = addMenu('openLibraryFrom', mxResources.get('openLibraryFrom'));
-			            elt.style.borderLeft = '1px solid lightgray';
-						elt.style.boxSizing = 'border-box';
-						elt.style.paddingRight = '6px';
-						elt.style.paddingLeft = '6px';
-						elt.style.height = '32px';
-			            elt.style.left = '50%';
+			            // var elt = addMenu('openLibraryFrom', mxResources.get('openLibraryFrom'));
+			            // elt.style.borderLeft = '1px solid lightgray';
+						// elt.style.boxSizing = 'border-box';
+						// elt.style.paddingRight = '6px';
+						// elt.style.paddingLeft = '6px';
+						// elt.style.height = '32px';
+			            // elt.style.left = '50%';
 					}
 	            }
 				else
@@ -770,29 +770,29 @@ EditorUi.initMinimalTheme = function()
 			}
 			else
 			{
-	        	ui.menus.addMenuItems(menu, ['new'], parent);
-				ui.menus.addSubmenu('openFrom', menu, parent);
+	        	// ui.menus.addMenuItems(menu, ['new'], parent);
+				// ui.menus.addSubmenu('openFrom', menu, parent);
 			
-				if (isLocalStorage)
-				{
-					this.addSubmenu('openRecent', menu, parent);
-				}
+				// if (isLocalStorage)
+				// {
+				// 	this.addSubmenu('openRecent', menu, parent);
+				// }
+				
+				// menu.addSeparator(parent);
+				
+				// if (file != null && file.constructor == DriveFile)
+				// {
+				// 	ui.menus.addMenuItems(menu, ['share'], parent);
+				// }
+				
+				// if (!mxClient.IS_CHROMEAPP && !EditorUi.isElectronApp &&
+				// 	file != null && file.constructor != LocalFile)
+				// {
+				// 	ui.menus.addMenuItems(menu, ['synchronize'], parent);
+				// }
 				
 				menu.addSeparator(parent);
-				
-				if (file != null && file.constructor == DriveFile)
-				{
-					ui.menus.addMenuItems(menu, ['share'], parent);
-				}
-				
-				if (!mxClient.IS_CHROMEAPP && !EditorUi.isElectronApp &&
-					file != null && file.constructor != LocalFile)
-				{
-					ui.menus.addMenuItems(menu, ['synchronize'], parent);
-				}
-				
-				menu.addSeparator(parent);
-				ui.menus.addSubmenu('save', menu, parent);
+				// ui.menus.addSubmenu('save', menu, parent);
 			}
 			
 			ui.menus.addSubmenu('exportAs', menu, parent);
@@ -803,29 +803,29 @@ EditorUi.initMinimalTheme = function()
             }
             else
             {
-            	ui.menus.addSubmenu('importFrom', menu, parent);
+            	// ui.menus.addSubmenu('importFrom', menu, parent);
             }
 
 			ui.menus.addMenuItems(menu, ['-', 'outline', 'layers'], parent);
 			
-			if (ui.commentsSupported())
-			{
-				ui.menus.addMenuItems(menu, ['comments'], parent);
-			}
+			// if (ui.commentsSupported())
+			// {
+			// 	ui.menus.addMenuItems(menu, ['comments'], parent);
+			// }
 			
-			ui.menus.addMenuItems(menu, ['-', 'find', 'tags'], parent);
+			// ui.menus.addMenuItems(menu, ['-', 'find', 'tags'], parent);
 			
-			if (file != null && ui.fileNode != null)
-			{
-				var filename = (file.getTitle() != null) ?
-					file.getTitle() : ui.defaultFilename;
+			// if (file != null && ui.fileNode != null)
+			// {
+			// 	var filename = (file.getTitle() != null) ?
+			// 		file.getTitle() : ui.defaultFilename;
 				
-				if (!/(\.html)$/i.test(filename) &&
-					!/(\.svg)$/i.test(filename))
-				{
-					this.addMenuItems(menu, ['-', 'properties']);
-				}
-			}
+			// 	if (!/(\.html)$/i.test(filename) &&
+			// 		!/(\.svg)$/i.test(filename))
+			// 	{
+			// 		this.addMenuItems(menu, ['-', 'properties']);
+			// 	}
+			// }
 
 			// Cannot use print in standalone mode on iOS as we cannot open new windows
 			if (!mxClient.IS_IOS || !navigator.standalone)
@@ -833,16 +833,16 @@ EditorUi.initMinimalTheme = function()
 				ui.menus.addMenuItems(menu, ['-', 'print', '-'], parent);
 			}
 			
-			ui.menus.addSubmenu('help', menu, parent);
+			// ui.menus.addSubmenu('help', menu, parent);
 
-            if (urlParams['embed'] == '1')
-			{
-				ui.menus.addMenuItems(menu, ['-', 'exit'], parent);
-			}
-			else
-			{
-				ui.menus.addMenuItems(menu, ['-', 'close']);
-			}
+            // if (urlParams['embed'] == '1')
+			// {
+			// 	ui.menus.addMenuItems(menu, ['-', 'exit'], parent);
+			// }
+			// else
+			// {
+			// 	ui.menus.addMenuItems(menu, ['-', 'close']);
+			// }
         })));
 
 		this.put('save', new Menu(mxUtils.bind(this, function(menu, parent)
@@ -885,15 +885,15 @@ EditorUi.initMinimalTheme = function()
         {
         	exportAsMenu.funct(menu, parent);
 
-    		if (!mxClient.IS_CHROMEAPP && !EditorUi.isElectronApp)
-    		{
-	            // Publish menu contains only one element by default...
-	            //ui.menus.addSubmenu('publish', menu, parent); 
-	            ui.menus.addMenuItems(menu, ['publishLink'], parent);
-    		}
+    		// if (!mxClient.IS_CHROMEAPP && !EditorUi.isElectronApp)
+    		// {
+	        //     // Publish menu contains only one element by default...
+	        //     //ui.menus.addSubmenu('publish', menu, parent); 
+	        //     ui.menus.addMenuItems(menu, ['publishLink'], parent);
+    		// }
     		
-            menu.addSeparator(parent);
-            ui.menus.addSubmenu('embed', menu, parent);
+            // menu.addSeparator(parent);
+            // ui.menus.addSubmenu('embed', menu, parent);
         })));
 
         var langMenu = this.get('language');
@@ -906,29 +906,29 @@ EditorUi.initMinimalTheme = function()
         // Extras menu is labelled preferences but keeps ID for extensions
         this.put('extras', new Menu(mxUtils.bind(this, function(menu, parent)
         {
-			if (urlParams['embed'] != '1')
-			{
-				ui.menus.addSubmenu('theme', menu, parent);
-			}
+			// if (urlParams['embed'] != '1')
+			// {
+			// 	ui.menus.addSubmenu('theme', menu, parent);
+			// }
 			
-			if (langMenu != null)
-			{
-				ui.menus.addSubmenu('language', menu, parent);
-			}
+			// if (langMenu != null)
+			// {
+			// 	ui.menus.addSubmenu('language', menu, parent);
+			// }
 			
 			ui.menus.addSubmenu('units', menu, parent);
 			menu.addSeparator(parent);
 			ui.menus.addMenuItems(menu, ['scrollbars', 'tooltips', 'ruler'], parent);
             
-			if (urlParams['embed'] != '1' && (isLocalStorage || mxClient.IS_CHROMEAPP))
-			{
-				ui.menus.addMenuItems(menu, ['-', 'search', 'scratchpad', '-', 'showStartScreen'], parent);
-			}
+			// if (urlParams['embed'] != '1' && (isLocalStorage || mxClient.IS_CHROMEAPP))
+			// {
+			// 	ui.menus.addMenuItems(menu, ['-', 'search', 'scratchpad', '-', 'showStartScreen'], parent);
+			// }
 
-			if (!ui.isOfflineApp() && isLocalStorage)
-			{
-	        	ui.menus.addMenuItem(menu, 'plugins', parent);
-			}
+			// if (!ui.isOfflineApp() && isLocalStorage)
+			// {
+	        // 	ui.menus.addMenuItem(menu, 'plugins', parent);
+			// }
 
 			menu.addSeparator(parent);
         	ui.menus.addMenuItem(menu, 'drawConfig', parent);

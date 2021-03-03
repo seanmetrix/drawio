@@ -12861,7 +12861,7 @@
 		this.actions.get('makeCopy').setEnabled(!restricted);
 		this.actions.get('print').setEnabled(!restricted);
 		this.menus.get('exportAs').setEnabled(!restricted);
-		this.menus.get('embed').setEnabled(!restricted);
+		// this.menus.get('embed').setEnabled(!restricted);
 		
 		// Disables libraries and extras menu in embed mode
 		// while waiting for file data
@@ -12869,11 +12869,11 @@
 				this.editor.graph.isEnabled();
 		this.menus.get('extras').setEnabled(libsEnabled);
 		
-		if (Editor.enableCustomLibraries)
-		{
-			this.menus.get('openLibraryFrom').setEnabled(libsEnabled);
-			this.menus.get('newLibrary').setEnabled(libsEnabled);
-		}
+		// if (Editor.enableCustomLibraries)
+		// {
+		// 	this.menus.get('openLibraryFrom').setEnabled(libsEnabled);
+		// 	this.menus.get('newLibrary').setEnabled(libsEnabled);
+		// }
 		
 		// Disables actions in the toolbar
 		var editable = (urlParams['embed'] == '1' &&
@@ -13441,14 +13441,10 @@
 		console.log("OPEN DATABASE:", this.database);
 		console.log("SAVE", urlParams['ably']);
 		if (urlParams['ably'] == 'server'){
-			console.log("SEND MESSAGE", JSON.stringify(mxUtils.getXml(this.getXmlFileData(null, null, true))));
+			console.log("SEND ABLY MESSAGE", JSON.stringify(mxUtils.getXml(this.getXmlFileData(null, null, true))));
 			window.savedXML.push( mxUtils.getXml(this.getXmlFileData(null, null, true)));
 			var record = mxUtils.getXml(this.getXmlFileData(null, null, true));
-
-			whiteboard_postMessage('immediation:whiteboard:publish', {
-				xml: record
-			});
-			// channel.publish('xmlData', record);
+			channel.publish('xmlData', record);
 		}
 
 		if (this.database == null)
