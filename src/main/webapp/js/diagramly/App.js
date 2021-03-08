@@ -13,6 +13,8 @@
  */
 App = function(editor, container, lightbox)
 {
+	console.log("NEW APP CREATION", editor, container, lightbox);
+	
 	EditorUi.call(this, editor, container, (lightbox != null) ? lightbox :
 		(urlParams['lightbox'] == '1' || (uiTheme == 'min' &&
 		urlParams['chrome'] != '0')));

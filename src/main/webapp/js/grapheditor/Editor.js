@@ -6,6 +6,7 @@
  */
 Editor = function(chromeless, themes, model, graph, editable)
 {
+	console.log("CREATING NEW EDITOR", chromeless, themes, model, graph, editable);
 	mxEventSource.call(this);
 	this.chromeless = (chromeless != null) ? chromeless : this.chromeless;
 	this.initStencilRegistry();
@@ -327,7 +328,9 @@ Editor.prototype.defaultGraphOverflow = 'hidden';
 /**
  * Initializes the environment.
  */
-Editor.prototype.init = function() { };
+Editor.prototype.init = function() { 
+	console.log("CUSTOM INIT FUNCTION");
+};
 
 /**
  * Sets the XML node for the current diagram.

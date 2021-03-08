@@ -1007,11 +1007,51 @@ EditorUi.initMinimalTheme = function()
 	{
 		editorUiInit.apply(this, arguments);
 
+		// var scribeSection = document.createElement('section');
+		// scribeSection.style.cssText = 'display: flex;padding: 10px;display:block;z-index:1000;position:absolute;top:0;right: 40px;height: 27px;width: 320px;background-color: transparent;';
+
+		// var scribeText = document.createElement('div');
+		// scribeText.innerHTML = 'N1 is scribing';
+		// scribeText.style.cssText = 'margin-right:10px;display: inline-block;';
+		// scribeSection.appendChild(scribeText);
+
+		// var scribeButton = document.createElement('button');
+		// scribeButton.setAttribute('class','btn btn-default');
+		// scribeButton.setAttribute('style','margin-left: 10px;');
+		// scribeButton.setAttribute('id','scribe-switch-btn');
+		// scribeButton.addEventListener('click', function(event){
+		// 	console.log("Change Srcibe");
+		// });
+		// var span = document.createElement('span');
+		// span.setAttribute('class','scribe-switch-text');
+		// span.innerHTML = 'Change Scribe';
+		// scribeButton.appendChild(span);
+		// scribeSection.append(scribeButton);
+
+		// var popoutButton = document.createElement('button');
+		// popoutButton.setAttribute('class','btn btn-default');
+		// popoutButton.setAttribute('style','margin-left: 10px;');
+		// popoutButton.setAttribute('id','scribe-switch-btn');
+		// popoutButton.addEventListener('click', function(event){
+		// 	console.log("POP OUT HERE");
+		// 	var popoutsrc = window.location.href + "drawio?demo=1&pv=0&ably=server" + "&r=" + new Date().getTime();
+		// 	let params = `scrollbars=no,resizable=no,status=no,location=no,toolbar=no,menubar=no,width=1200,height=1024,left=100,top=100`;
+		// 	open(popoutsrc, 'Immediation Draw App', params);
+		// });
+		// var icon = document.createElement('i');
+		// icon.setAttribute('class','fa fa-arrows-alt');
+		// popoutButton.appendChild(icon);
+		// scribeSection.append(popoutButton);
+
+		// document.body.appendChild(scribeSection);
+		// console.log("ADD NEW SCRIBE SECTION", scribeSection);
+
+
 		var div = document.createElement('div');
 		div.style.cssText = 'position:absolute;left:0px;right:0px;top:0px;overflow-y:auto;overflow-x:hidden;';
 		div.style.bottom = (urlParams['embed'] != '1' || urlParams['libraries'] == '1') ? '63px' : '32px';
 		this.sidebar = this.createSidebar(div);
-     
+
 		if (iw >= 1000 || urlParams['clibs'] != null || urlParams['libs'] != null || urlParams['search-shapes'] != null)
 		{
 			// toggleShapes(this, true);
